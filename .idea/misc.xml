@@ -3,6 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Farmerline/AndroidStudioProjects/SpaceJam/app/src/main/res/drawable/ic_back.xml" value="0.1" />
+        <entry key="..\:/Users/Farmerline/AndroidStudioProjects/SpaceJam/app/src/main/res/drawable/ic_lauchpad.xml" value="0.1" />
+        <entry key="..\:/Users/Farmerline/AndroidStudioProjects/SpaceJam/app/src/main/res/drawable/ic_next_launches.xml" value="0.1" />
+        <entry key="..\:/Users/Farmerline/AndroidStudioProjects/SpaceJam/app/src/main/res/drawable/ic_past_launches.xml" value="0.1" />
         <entry key="..\:/Users/Farmerline/AndroidStudioProjects/SpaceJam/app/src/main/res/drawable/ic_space_icon.xml" value="0.1" />
       </map>
     </option>

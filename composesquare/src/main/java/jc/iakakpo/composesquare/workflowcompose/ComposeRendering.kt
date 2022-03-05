@@ -1,4 +1,4 @@
-package jc.iakakpo.spacejam.workflowcompose
+package jc.iakakpo.composesquare.workflowcompose
 
 import androidx.compose.runtime.Composable
 import com.squareup.workflow1.ui.AndroidViewRendering
@@ -58,7 +58,8 @@ public interface ComposeRendering : AndroidViewRendering<Nothing> {
      */
     override val type: KClass<in ComposeRendering> = ComposeRendering::class
 
-    @Composable override fun Content(
+    @Composable
+    override fun Content(
       rendering: ComposeRendering,
       viewEnvironment: ViewEnvironment
     ) {

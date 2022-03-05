@@ -1,0 +1,6 @@
+query PastLaunches($limit:Int) {
+    launchesPast(limit: $limit) {
+        launch_date_local
+        launch_year
+    }
+}

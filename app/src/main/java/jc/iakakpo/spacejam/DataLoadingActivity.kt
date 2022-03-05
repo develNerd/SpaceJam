@@ -1,6 +1,6 @@
 package jc.iakakpo.spacejam
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.airbnb.lottie.compose.*
 import jc.iakakpo.spacejam.ui.theme.*
+import jc.iakakpo.spacejam.utils.gotoActivity
 import kotlinx.coroutines.delay
 
 class DataLoadingActivity : ComponentActivity() {
@@ -25,8 +26,6 @@ class DataLoadingActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             SpaceJamTheme() {
-
-
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
@@ -41,9 +40,12 @@ class DataLoadingActivity : ComponentActivity() {
                     }
 
                    LaunchedEffect(key1 = true) {
-                        delay(4000)
-                        loadingText = "Almost Done"
+                        delay(1500)
+                        loadingText = "Almost Ready.."
                         textColor = spaceGreenLight
+                       delay(800)
+                       this@DataLoadingActivity.gotoActivity<MainActivity>()
+                       startActivity(Intent(this@DataLoadingActivity,MainActivity::class.java))
                     }
 
 

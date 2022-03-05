@@ -1,7 +1,7 @@
 // See https://youtrack.jetbrains.com/issue/KT-31734
 @file:Suppress("RemoveEmptyParenthesesFromAnnotationEntry")
 
-package jc.iakakpo.spacejam.workflowcompose
+package jc.iakakpo.composesquare.workflowcompose
 
 import android.content.Context
 import android.view.View
