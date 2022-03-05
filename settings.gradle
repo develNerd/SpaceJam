@@ -9,6 +9,10 @@ pluginManagement {
             if( requested.id.id == 'dagger.hilt.android.plugin') {
                 useModule("com.google.dagger:hilt-android-gradle-plugin:2.39.1")
             }
+            if( requested.id.id == 'org.jetbrains.dokka') {
+                useModule("org.jetbrains.dokka:dokka-gradle-plugin:1.6.10")
+            }
+
         }
     }
 }
