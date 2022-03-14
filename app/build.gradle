@@ -93,6 +93,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version")
 
 
+    //lottie
     def lottie_version = "5.0.1"
     implementation "com.airbnb.android:lottie-compose:$lottie_version"
 
@@ -100,10 +101,44 @@ dependencies {
     // When using Kotlin.
     implementation 'com.google.dagger:hilt-android:2.39.1'
     kapt 'com.google.dagger:hilt-compiler:2.39.1'
+    kapt 'androidx.hilt:hilt-compiler:1.0.0'
 
-
+    //compose navigation
     def nav_version = "2.4.1"
 
     implementation "androidx.navigation:navigation-compose:$nav_version"
+
+    //Compose Testing
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4:$compose_version")
+// Needed for createComposeRule, but not createAndroidComposeRule:
+    debugImplementation("androidx.compose.ui:ui-test-manifest:$compose_version")
+
+
+    implementation "androidx.hilt:hilt-navigation-compose:1.0.0"
+
+    //Timber
+    implementation 'com.jakewharton.timber:timber:5.0.1'
+
+    //HttpLogger
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.9.1'
+
+    //jsoup for downloading thumbnail from websites
+    implementation 'org.jsoup:jsoup:1.14.3'
+
+    //Coil
+    implementation("io.coil-kt:coil-compose:2.0.0-rc01")
+
+    //paging
+    def paging_version = "3.1.0"
+
+    implementation "androidx.paging:paging-runtime:$paging_version"
+
+    // alternatively - without Android dependencies for tests
+    testImplementation "androidx.paging:paging-common:$paging_version"
+
+    implementation "androidx.paging:paging-compose:1.0.0-alpha14"
+
+
+
 
 }

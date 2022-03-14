@@ -1,6 +1,19 @@
-query PastLaunches($limit:Int) {
-    launchesPast(limit: $limit) {
+query PastLaunches($limit:Int, $offset: Int) {
+    launchesPast(limit: $limit,offset: $offset) {
         launch_date_local
         launch_year
+        mission_name
+        id
+        details
+        links {
+            flickr_images
+            article_link
+            video_link
+        }
+        ships {
+            name
+            model
+        }
     }
 }
+

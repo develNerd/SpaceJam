@@ -39,17 +39,20 @@ class DataLoadingActivity : ComponentActivity() {
                         mutableStateOf(textColor())
                     }
 
-                   LaunchedEffect(key1 = true) {
+                    LaunchedEffect(key1 = true) {
                         delay(1500)
                         loadingText = "Almost Ready.."
                         textColor = spaceGreenLight
-                       delay(800)
-                       this@DataLoadingActivity.gotoActivity<MainActivity>()
-                       startActivity(Intent(this@DataLoadingActivity,MainActivity::class.java))
+                        delay(800)
+                        this@DataLoadingActivity.gotoActivity<MainActivity>()
+                        startActivity(Intent(this@DataLoadingActivity, MainActivity::class.java))
                     }
 
 
-                    Column(modifier = Modifier.wrapContentSize(),horizontalAlignment = Alignment.CenterHorizontally) {
+                    Column(
+                        modifier = Modifier.wrapContentSize(),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
                         RocketLoader()
                         LoadingStatus(loadingText = loadingText, textColor = textColor)
                     }
@@ -72,7 +75,7 @@ fun LoadingStatus(loadingText: String, textColor: Color = textColor()) {
 }
 
 @Composable
-fun RocketLoader() {
+fun RocketLoader(modifier: Modifier = Modifier) {
     val composition by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.rocket_in_space))
     val progress by animateLottieCompositionAsState(
         composition,
@@ -80,7 +83,7 @@ fun RocketLoader() {
     )
     LottieAnimation(
         composition,
-        progress, modifier = Modifier.size(100.dp)
+        progress, modifier = modifier.size(100.dp)
     )
 }
 

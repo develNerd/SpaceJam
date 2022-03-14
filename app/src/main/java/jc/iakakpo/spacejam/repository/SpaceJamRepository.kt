@@ -8,6 +8,9 @@ import kotlinx.coroutines.flow.Flow
 /**
  * @author Isaac Akakpo
  * Created on 3/5/2022 3:13 PM
+ *
+ *  Interface to be implemented by [SpaceJamRepositoryImpl]
+ *
  */
 interface SpaceJamRepository {
     suspend fun getLaunchesPast(limit:Int): Flow<ClientResult<ApolloResponse<PastLaunchesQuery.Data>>>

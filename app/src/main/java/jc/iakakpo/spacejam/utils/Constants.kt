@@ -8,3 +8,4 @@ const val HUNDRED = 100
 const val TEN = 10
 
 const val graphQlUrl = "https://api.spacex.land/graphql/"
+const val BACK_OFF_DELAY_IN_MILLIS = 7000L // 7 seconds in millis
