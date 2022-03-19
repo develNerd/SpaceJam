@@ -7,8 +7,11 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Scaffold
-import androidx.compose.runtime.Composable
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
@@ -20,11 +23,14 @@ import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
 import jc.iakakpo.spacejam.enums.Pages
 import jc.iakakpo.spacejam.ui.screens.MainDashboardItem
+import jc.iakakpo.spacejam.ui.screens.companydetails.CompanyDetailsViewModel
+import jc.iakakpo.spacejam.ui.screens.companydetails.Details
 import jc.iakakpo.spacejam.ui.screens.pastlaunches.PastLaunchesPage
+import jc.iakakpo.spacejam.ui.screens.pastlaunches.PastLaunchesViewModel
 import jc.iakakpo.spacejam.ui.theme.SpaceJamTheme
 import jc.iakakpo.spacejam.ui.theme.backGroundColor
+import jc.iakakpo.spacejam.ui.theme.dp10
 import jc.iakakpo.spacejam.ui.theme.spaceLightGreen
-import jc.iakakpo.spacejam.ui.screens.pastlaunches.PastLaunchesViewModel
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -43,9 +49,9 @@ class MainActivity : ComponentActivity() {
                         val pastLaunchesViewModel = hiltViewModel<PastLaunchesViewModel>()
                         PastLaunchesPage(pastLaunchesViewModel, navController)
                     }
-                    composable(Pages.PAST_LAUNCHES.pageName) {
-                        val pastLaunchesViewModel = hiltViewModel<PastLaunchesViewModel>()
-                        PastLaunchesPage(pastLaunchesViewModel, navController)
+                    composable(Pages.COMPANY_DETAILS.pageName) {
+                        val companyDetailsViewModel: CompanyDetailsViewModel = hiltViewModel<CompanyDetailsViewModel>()
+                        Details(navController, companyDetailsViewModel)
                     }
                     /*...*/
                 }
@@ -60,7 +66,7 @@ fun SpaceMainPage(navController: NavController) {
     Scaffold(
         topBar =
         {
-            Row(
+            Box(
                 modifier = Modifier
                     .fillMaxWidth()
                     .background(color = spaceLightGreen)
@@ -69,10 +75,38 @@ fun SpaceMainPage(navController: NavController) {
                     painter = painterResource(id = R.drawable.ic_space_icon),
                     contentDescription = "",
                     modifier = Modifier
+                        .align(Alignment.CenterStart)
                         .wrapContentWidth()
                         .padding(20.dp)
                         .height(16.dp)
                 )
+
+                var expanded by remember {
+                    mutableStateOf(false)
+                }
+
+                Box(modifier = Modifier.padding(end = dp10).align(Alignment.CenterEnd)) {
+                    IconButton(onClick = {
+                        expanded = !expanded
+                    }, modifier = Modifier.align(Alignment.CenterEnd)) {
+                        Icon(Icons.Filled.MoreVert, contentDescription = "")
+                    }
+                    DropdownMenu(
+                        expanded = expanded,
+                        onDismissRequest = { expanded = false },Modifier.align(Alignment.BottomEnd)
+                    ) {
+                        DropdownMenuItem(onClick = {
+                            expanded = false
+                            navController.navigate(Pages.COMPANY_DETAILS.pageName) }) {
+                            Text("Company Details")
+                        }
+                    }
+                }
+
+
+                // DropDown
+
+
             }
         },
         modifier = Modifier.fillMaxSize(), backgroundColor = backGroundColor()

@@ -18,23 +18,24 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.airbnb.lottie.compose.*
+import dagger.hilt.android.AndroidEntryPoint
 import jc.iakakpo.spacejam.ui.theme.SpaceJamTheme
 import jc.iakakpo.spacejam.ui.theme.backGroundColor
-import jc.iakakpo.spacejam.ui.theme.spaceGreenLight
 import jc.iakakpo.spacejam.ui.theme.textColor
 import jc.iakakpo.spacejam.ui.viewmodel.StartUpViewModel
 import jc.iakakpo.spacejam.utils.UIState
 import jc.iakakpo.spacejam.utils.gotoActivity
 import jc.iakakpo.spacejam.utils.parseToCompanyDetails
-import kotlinx.coroutines.delay
 
+@AndroidEntryPoint
 class DataLoadingActivity : ComponentActivity() {
-
-    private val startUpViewModel by viewModels<StartUpViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val startUpViewModel: StartUpViewModel by viewModels()
+
         setContent {
 
             SpaceJamTheme() {
@@ -56,7 +57,6 @@ class DataLoadingActivity : ComponentActivity() {
                     val companyState by remember(key1 = startUpViewModel) { startUpViewModel.getCompanyDetails() }
                         .collectAsState(initial = UIState.Loading)
 
-
                     companyState.apply {
                         when (this) {
                             is UIState.DataLoaded -> {
@@ -75,19 +75,17 @@ class DataLoadingActivity : ComponentActivity() {
                                 }
                             }
                             is UIState.NoInternet -> {
-                                RetryView(boxScope = this@Box){
+                                RetryView(boxScope = this@Box) {
                                     startUpViewModel.retry()
                                 }
                             }
                             is UIState.SomethingWentWrong -> {
-                              RetryView(boxScope = this@Box){
-                                  startUpViewModel.retry()
-                              }
+                                RetryView(boxScope = this@Box) {
+                                    startUpViewModel.retry()
+                                }
                             }
                         }
                     }
-
-
 
                    /* LaunchedEffect(key1 = true) {
                         delay(1500)
@@ -95,8 +93,6 @@ class DataLoadingActivity : ComponentActivity() {
                         delay(800)
 
                     }*/
-
-
                 }
             }
         }
@@ -115,7 +111,6 @@ fun LoadingStatus(loadingText: String, textColor: Color = textColor()) {
     )
 }
 
-
 /**
  *
  * Rocker loader page for when data is loading
@@ -133,13 +128,12 @@ fun RocketLoader(modifier: Modifier = Modifier) {
     )
 }
 
-
 /**
  *
  * Retry view to retry if Api Call isn't successful
  * */
 @Composable
-fun RetryView(boxScope: BoxScope,onRetry:() -> Unit) {
+fun RetryView(boxScope: BoxScope, onRetry: () -> Unit) {
     boxScope.apply {
         Column(modifier = Modifier.align(Alignment.Center), horizontalAlignment = Alignment.CenterHorizontally) {
             Text(text = "Something Went Wrong", modifier = Modifier.align(Alignment.CenterHorizontally))

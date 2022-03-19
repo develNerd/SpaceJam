@@ -1,7 +1,9 @@
 package jc.iakakpo.spacejam.repository
 
+import android.content.Context
 import com.apollographql.apollo3.ApolloClient
 import com.apollographql.apollo3.api.Optional
+import dagger.hilt.android.qualifiers.ApplicationContext
 import jc.iakakpo.spacejam.CompanyDetails
 import jc.iakakpo.spacejam.CompanyQuery
 import jc.iakakpo.spacejam.PastLaunchesQuery
@@ -16,10 +18,10 @@ import javax.inject.Inject
  *
  *
  */
-class SpaceJamRepositoryImpl @Inject constructor(private val client: ApolloClient,db:SpaceJamDb) :
+class SpaceJamRepositoryImpl @Inject constructor(@ApplicationContext appContext: Context, private val client: ApolloClient, db:SpaceJamDb) :
   SpaceJamRepository {
 
-  private val queries = db.spaceJamDb().companyDetailsQueries
+  private val queries = db.spaceJamDb(appContext).companyDetailsQueries
 
   override suspend fun getLaunchesPast(limit: Int) = flow {
     emit(makeClientRequest(client.query(PastLaunchesQuery(Optional.presentIfNotNull(limit)))))
@@ -33,8 +35,8 @@ class SpaceJamRepositoryImpl @Inject constructor(private val client: ApolloClien
     queries.inserCompany(companyDetails)
   }
 
-  override suspend fun getCompanyLocal(): CompanyDetails? {
-    return queries.getCompany().executeAsOneOrNull()
+  override suspend fun getCompanyLocal(): CompanyDetails {
+    return queries.getCompany().executeAsList()[0]
   }
 
 

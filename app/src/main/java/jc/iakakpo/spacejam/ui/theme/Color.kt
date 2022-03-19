@@ -16,7 +16,7 @@ val spaceGreenTransluscent = Color(0xFFF9E8E8)
 val spacePrimaryDark = Color(0xFF041619)
 val spaceLightGreen = Color(0xFFF9E8E8)
 val spaceGreenLightTrans = Color(0x2C3DDC84)
-val spaceBlueLightTrans = Color(0x574285F4)
+val spaceBlueLightTrans = Color(0x284285F4)
 
 
 

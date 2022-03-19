@@ -34,9 +34,7 @@ import jc.iakakpo.spacejam.utils.randoms
 fun PastLaunchesPage(viewModel: PastLaunchesViewModel, navController: NavController) {
 
     Scaffold(topBar = {
-        Toolbar(title = "Past Launches", onMenuClick = {
-                                                       navController.navigate("")
-        }, showDropDown = true) {
+        Toolbar(title = "Past Launches", showDropDown = false) {
           navController.popBackStack()
         }
     }, backgroundColor = backGroundColor()) {

@@ -1,5 +1,6 @@
 package jc.iakakpo.spacejam.ui.screens.companydetails
 
+import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import jc.iakakpo.spacejam.CompanyDetails
 import jc.iakakpo.spacejam.repository.SpaceJamRepository
@@ -13,7 +14,7 @@ import javax.inject.Inject
  */
 
 @HiltViewModel
-class CompanyDetailsViewModel @Inject constructor(private val spaceJamRepository: SpaceJamRepository) {
+class CompanyDetailsViewModel @Inject constructor(private val spaceJamRepository: SpaceJamRepository) : ViewModel() {
 
 
   fun getCompanyDetails() : Flow<CompanyDetails?> = flow {

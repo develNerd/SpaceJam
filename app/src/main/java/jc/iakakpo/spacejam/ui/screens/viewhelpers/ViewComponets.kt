@@ -44,24 +44,7 @@ fun Toolbar(title: String, showDropDown: Boolean, onMenuClick: () -> Unit = {}, 
         )
 
         if (showDropDown) {
-            var expanded by remember {
-              mutableStateOf(false)
-            }
-            IconButton(onClick = { expanded = true
-            }) {
-                Icon(Icons.Filled.Menu, contentDescription = "")
-            }
 
-          //DropDown
-
-          DropdownMenu(
-            expanded = expanded,
-            onDismissRequest = { expanded = false }
-          ) {
-            DropdownMenuItem(onClick = { /* Handle refresh! */ }) {
-              Text("Company Details")
-            }
-          }
         }
     }
 }
