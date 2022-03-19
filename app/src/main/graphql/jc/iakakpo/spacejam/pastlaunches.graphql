@@ -17,3 +17,26 @@ query PastLaunches($limit:Int, $offset: Int) {
     }
 }
 
+query Company {
+    company {
+        ceo
+        coo
+        founded
+        name
+        headquarters {
+            address
+            city
+            state
+        }
+        links {
+            website
+            twitter
+            flickr
+        }
+        employees
+        summary
+        valuation
+        founder
+    }
+}
+

@@ -1,0 +1,27 @@
+import jc.iakakpo.spacejam.CompanyQuery.Headquarters;
+import jc.iakakpo.spacejam.CompanyQuery.Links;
+
+
+
+CREATE TABLE CompanyDetails (
+    ceo TEXT NOT NULL,
+    coo TEXT NOT NULL,
+    founded TEXT NOT NULL,
+    name TEXT NOT NULL,
+    headquarers TEXT AS Headquarters,
+    links TEXT AS Links,
+    employees INTEGER,
+    summary TEXT NOT NULL,
+    valuation TEXT NOT NULL,
+    founder TEXT
+);
+
+
+getCompany:
+SELECT *
+FROM CompanyDetails;
+
+inserCompany:
+INSERT OR REPLACE
+INTO CompanyDetails
+VALUES ?;

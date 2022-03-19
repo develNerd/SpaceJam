@@ -16,7 +16,9 @@ val spaceGreenTransluscent = Color(0xFFF9E8E8)
 val spacePrimaryDark = Color(0xFF041619)
 val spaceLightGreen = Color(0xFFF9E8E8)
 val spaceGreenLightTrans = Color(0x2C3DDC84)
+val spaceBlueLightTrans = Color(0x574285F4)
 
 
-fun backGroundColor(isDark:Boolean = false) = if (!isDark) Color(0xFFFFFFFF) else colorPrimary
-fun textColor(isDark:Boolean = false) = if (!isDark) colorPrimary else Color(0xFFD1C5C5)
+
+fun backGroundColor(isDark: Boolean = false) = if (!isDark) Color(0xFFFFFFFF) else colorPrimary
+fun textColor(isDark: Boolean = false) = if (!isDark) colorPrimary else Color(0xFFD1C5C5)

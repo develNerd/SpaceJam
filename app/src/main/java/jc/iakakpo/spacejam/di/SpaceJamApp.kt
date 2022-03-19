@@ -1,7 +1,6 @@
 package jc.iakakpo.spacejam.di
 
 import android.app.Application
-import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.HiltAndroidApp
 import jc.iakakpo.spacejam.BuildConfig
 import timber.log.Timber
@@ -14,14 +13,15 @@ import timber.log.Timber
  */
 @HiltAndroidApp
 class SpaceJamApp : Application() {
-    init {
-        initLogger()
+  init {
+    initLogger()
+  }
+
+  private fun initLogger() {
+    if (BuildConfig.DEBUG) {
+      Timber.plant(Timber.DebugTree())
     }
-    private fun initLogger() {
-        if (BuildConfig.DEBUG) {
-            Timber.plant(Timber.DebugTree())
-        }
-    }
+  }
 }
 
 

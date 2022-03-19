@@ -20,17 +20,17 @@ import jc.iakakpo.spacejam.repository.SpaceJamRepositoryImpl
 abstract class ViewModelModule {
 
 
-    /**
-     * Bind spaceJam repository with it's implementation
-     * using [@Binds] annotation from Dagger-Hilt
-     *
-     *
-     * @param spaceJamRepository -> [SpaceJamRepositoryImpl]
-     * @return [SpaceJamRepository]
-     */
-    @Binds
-    abstract fun bindSpaceJamRepository(
-        spaceJamRepository: SpaceJamRepositoryImpl
-    ): SpaceJamRepository
+  /**
+   * Bind spaceJam repository with it's implementation
+   * using [@Binds] annotation from Dagger-Hilt
+   *
+   *
+   * @param spaceJamRepository -> [SpaceJamRepositoryImpl]
+   * @return [SpaceJamRepository]
+   */
+  @Binds
+  abstract fun bindSpaceJamRepository(
+    spaceJamRepository: SpaceJamRepositoryImpl
+  ): SpaceJamRepository
 
 }

@@ -7,9 +7,10 @@ package jc.iakakpo.spacejam.enums
  *
  *
  */
-enum class Pages (val pageName:String){
-    MAIN_PAGE("mainPage"),
-    PAST_LAUNCHES("pastLaunches"),
-    SHIPS("ships"),
-    LAUNCH_PADS("launchPads")
+enum class Pages(val pageName: String) {
+  MAIN_PAGE("mainPage"),
+  PAST_LAUNCHES("pastLaunches"),
+  COMPANY_DETAILS("companyDetails"),
+  SHIPS("ships"),
+  LAUNCH_PADS("launchPads")
 }

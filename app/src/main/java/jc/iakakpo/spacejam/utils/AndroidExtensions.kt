@@ -2,26 +2,15 @@ package jc.iakakpo.spacejam.utils
 
 import android.content.Context
 import android.content.Intent
-import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.LazyGridScope
-import androidx.compose.foundation.lazy.LazyItemScope
-import androidx.compose.runtime.*
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import androidx.paging.LoadState
-import androidx.paging.compose.LazyPagingItems
-import jc.iakakpo.spacejam.ui.screens.End
-import kotlinx.coroutines.delay
-import timber.log.Timber
+import jc.iakakpo.spacejam.CompanyDetails
+import jc.iakakpo.spacejam.CompanyQuery
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 
 /**
  * @author Isaac Akakpo
  * Created on 2/28/2022 9:19 AM
  */
-
-
 
 /*
 * Extended Generic function to easily launch an
@@ -51,50 +40,33 @@ val randoms = listOf<String>(
     "https://cdn.pixabay.com/photo/2016/03/18/15/02/ufo-1265186_1280.jpg"
 )
 
-@OptIn(ExperimentalFoundationApi::class)
-fun <T : Any> LazyGridScope.items(items: LazyPagingItems<T>,
-                                  itemContent: @Composable LazyItemScope.(value: T?) -> Unit) {
+fun Any.toJsonString(): String = Json.encodeToString(this)
 
-    items(
-        count = items.itemCount
-    ) { index ->
-
-        itemContent(items[index])
-    }
-
+fun CompanyQuery.Company.parseToCompanyDetails(): CompanyDetails {
+    return CompanyDetails(
+        ceo = this.ceo ?: "",
+        coo = this.coo ?: "",
+        founded = this.founded.toString() ?: "",
+        name = this.name ?: "",
+        headquarers = this.headquarters,
+        links = this.links,
+        employees = this.employees?.toLong(),
+        this.summary ?: "",
+        this.valuation.toString() ?: "",
+        this.founder
+    )
 }
 
-
-
-@ExperimentalFoundationApi
-@Composable
-fun <T : Any> HandleLoadingMoreData(stateView: @Composable () -> Unit, errorView: @Composable () -> Unit, pagingItems: LazyPagingItems<T>,manualRefresh:Boolean,setManualRefresh:(Boolean)-> Unit) {
-
-    pagingItems.apply {
-        when {
-            loadState.refresh is LoadState.Loading || loadState.append is LoadState.Loading -> stateView()
-            loadState.refresh is LoadState.Error && !manualRefresh -> errorView()
-            loadState.refresh is LoadState.Error && manualRefresh -> End()
-            loadState.append is LoadState.NotLoading -> End()
-            loadState.append is LoadState.Error -> {
-                setManualRefresh(true)
-                End()
-                LaunchedEffect(true){
-                    while(true) {
-                        delay(BACK_OFF_DELAY_IN_MILLIS)
-                        retry()
-                    }
-
-                }
-            }
-            else  ->  End()
-        }
-        Timber.e("${pagingItems.loadState}")
-
-
-
-    }
-
+fun CompanyDetails.asMap():Map<String,Any?>{
+    val map = mutableMapOf<String,Any?>()
+    map["CEO"] = ceo
+    map["COO"] = coo
+    map["Head Quarters"] = headquarers
+    map["Founded"] = founded
+    map["Founder"] = founder
+    map["Summary"] = summary
+    map["employees"] = employees
+    map["employees"] = employees
+    map["links"] = links
+    return map
 }
-
-
