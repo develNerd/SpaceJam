@@ -25,15 +25,25 @@ import jc.iakakpo.spacejam.ui.theme.SpaceJamTheme
 import jc.iakakpo.spacejam.ui.theme.backGroundColor
 import jc.iakakpo.spacejam.ui.theme.textColor
 import jc.iakakpo.spacejam.ui.viewmodel.StartUpViewModel
+import jc.iakakpo.spacejam.utils.PrefManager
 import jc.iakakpo.spacejam.utils.UIState
 import jc.iakakpo.spacejam.utils.gotoActivity
 import jc.iakakpo.spacejam.utils.parseToCompanyDetails
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class DataLoadingActivity : ComponentActivity() {
 
+    @Inject
+    lateinit var prefManager: PrefManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
+        if (prefManager.isCompanyDetailsSaved){
+            this@DataLoadingActivity.gotoActivity<MainActivity>(true)
+        }
         val startUpViewModel: StartUpViewModel by viewModels()
 
         setContent {
@@ -46,11 +56,11 @@ class DataLoadingActivity : ComponentActivity() {
                     contentAlignment = Alignment.Center
                 ) {
 
-                    var loadingText by remember {
+                    val loadingText by remember {
                         mutableStateOf("Loading.....")
                     }
 
-                    var textColor by remember {
+                    val textColor by remember {
                         mutableStateOf(textColor())
                     }
 
@@ -61,8 +71,8 @@ class DataLoadingActivity : ComponentActivity() {
                         when (this) {
                             is UIState.DataLoaded -> {
                                 startUpViewModel.saveCompanyDetailsLocal(response.company?.parseToCompanyDetails()).also {
+                                    prefManager.isCompanyDetailsSaved = true
                                     this@DataLoadingActivity.gotoActivity<MainActivity>()
-                                    startActivity(Intent(this@DataLoadingActivity, MainActivity::class.java))
                                 }
                             }
                             is UIState.Loading -> {

@@ -1,13 +1,16 @@
 package jc.iakakpo.spacejam.di
 
+import android.content.Context
 import com.apollographql.apollo3.ApolloClient
 import com.apollographql.apollo3.network.okHttpClient
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import jc.iakakpo.spacejam.BuildConfig
 import jc.iakakpo.spacejam.models.SpaceJamDb
+import jc.iakakpo.spacejam.utils.PrefManager
 import jc.iakakpo.spacejam.utils.graphQlUrl
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -62,6 +65,7 @@ object SpaceJamModule {
     }
     return okHttpClient.build()
   }
+
 
   /**
    * Apiclient
