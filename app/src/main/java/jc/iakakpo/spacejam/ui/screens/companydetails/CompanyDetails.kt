@@ -30,8 +30,10 @@ import jc.iakakpo.spacejam.CompanyQuery
 import jc.iakakpo.spacejam.MainActivity
 import jc.iakakpo.spacejam.R
 import jc.iakakpo.spacejam.ui.screens.viewhelpers.Toolbar
+import jc.iakakpo.spacejam.ui.screens.viewhelpers.onLinkClick
 import jc.iakakpo.spacejam.ui.theme.*
 import jc.iakakpo.spacejam.utils.asMap
+import jc.iakakpo.spacejam.utils.castAs
 
 /**
  * @author Isaac Akakpo
@@ -97,7 +99,6 @@ fun Details(navController: NavController, companyDetailsViewModel: CompanyDetail
     }
 }
 
-inline fun <reified T> Any.castAs(): T? = this as? T
 
 @Composable
 fun DetailsItem(
@@ -178,11 +179,3 @@ fun DetailsItem(
     }
 }
 
-fun Modifier.onLinkClick(text: String?, context: Context) = composed {
-    this.clickable {
-        if (!text.isNullOrEmpty() && text.contains("https")) {
-            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(text))
-            startActivity(context, browserIntent, null)
-        }
-    }
-}

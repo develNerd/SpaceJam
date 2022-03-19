@@ -1,10 +1,17 @@
 package jc.iakakpo.spacejam.ui.screens.viewhelpers
 
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.lazy.LazyGridScope
 import androidx.compose.foundation.lazy.LazyItemScope
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.composed
+import androidx.core.content.ContextCompat
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import jc.iakakpo.spacejam.ui.screens.pastlaunches.End
@@ -59,5 +66,14 @@ fun <T : Any> HandleLoadingMoreData(
       else -> End()
     }
     Timber.e("${pagingItems.loadState}")
+  }
+}
+
+fun Modifier.onLinkClick(text: String?, context: Context) = composed {
+  this.clickable {
+    if (!text.isNullOrEmpty() && text.contains("https")) {
+      val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(text))
+      ContextCompat.startActivity(context, browserIntent, null)
+    }
   }
 }

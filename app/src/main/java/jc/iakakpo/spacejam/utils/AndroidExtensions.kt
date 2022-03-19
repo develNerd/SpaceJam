@@ -70,3 +70,6 @@ fun CompanyDetails.asMap():Map<String,Any?>{
     map["links"] = links
     return map
 }
+
+inline fun <reified T> Any.castAs(): T? = this as? T
+
