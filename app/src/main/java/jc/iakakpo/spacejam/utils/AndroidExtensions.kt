@@ -4,8 +4,11 @@ import android.content.Context
 import android.content.Intent
 import jc.iakakpo.spacejam.CompanyDetails
 import jc.iakakpo.spacejam.CompanyQuery
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.flow.*
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
+import timber.log.Timber
 
 /**
  * @author Isaac Akakpo
@@ -72,4 +75,23 @@ fun CompanyDetails.asMap():Map<String,Any?>{
 }
 
 inline fun <reified T> Any.castAs(): T? = this as? T
+
+
+
+@FlowPreview
+fun <T> retryableFlow(retryTrigger: RetryTrigger, flowProvider: () -> Flow<T>) =
+    retryTrigger.retryEvent.filter { it == RetryTrigger.State.RETRYING }
+        .flatMapConcat { flowProvider() }
+        .onEach { retryTrigger.retryEvent.value = RetryTrigger.State.IDLE }
+
+class RetryTrigger {
+    enum class State { RETRYING, IDLE }
+
+    val retryEvent = MutableStateFlow(State.RETRYING)
+
+    fun retry() {
+        Timber.e("Retrying......")
+        retryEvent.value = State.RETRYING
+    }
+}
 

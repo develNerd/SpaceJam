@@ -46,11 +46,12 @@ fun Details(navController: NavController, companyDetailsViewModel: CompanyDetail
     val companyDetails by remember(key1 = companyDetailsViewModel) { companyDetailsViewModel.getCompanyDetails() }
         .collectAsState(null)
 
+
     Scaffold(topBar = {
         Toolbar(title = "Company Details", showDropDown = false) {
             navController.popBackStack()
         }
-    }, backgroundColor = backGroundColor()) {
+    },backgroundColor = backGroundColor()) {
         Column(
             modifier = Modifier
                 .fillMaxSize()

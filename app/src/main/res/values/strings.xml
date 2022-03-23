@@ -1,3 +1,10 @@
 <resources>
   <string name="app_name">SpaceJam</string>
+  <string name="mainPage">Main Page</string>
+  <string name="pastLaunches">Past Launches</string>
+  <string name="companyDetails">Company Details</string>
+  <string name="ships">Ships</string>
+  <string name="landPads">Land Pads</string>
+  <string name="missions">Missions</string>
+
 </resources>

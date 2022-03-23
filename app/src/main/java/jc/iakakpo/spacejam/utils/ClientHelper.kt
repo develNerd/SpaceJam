@@ -11,6 +11,10 @@ import java.net.UnknownHostException
  * @author Isaac Akakpo
  * Created on 3/5/2022 4:54 PM
  */
+
+/**
+ *
+ * */
 suspend fun <T : Operation.Data> makeClientRequest(call: ApolloCall<T>): ClientResult<ApolloResponse<T>> {
   return try {
     ClientResult.Success(call.execute())

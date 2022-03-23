@@ -57,11 +57,11 @@ class PastLaunchesViewModel @Inject constructor(
         val state = when (this) {
           is ClientResult.Error -> {
             Timber.e(error.message)
-            UIState.SomethingWentWrong
+            UIState.SomethingWentWrong(error)
           }
           is ClientResult.HttpError -> {
             Timber.e(error.message)
-            UIState.SomethingWentWrong
+            UIState.SomethingWentWrong(error)
           }
           is ClientResult.InProgress -> {
             UIState.Loading

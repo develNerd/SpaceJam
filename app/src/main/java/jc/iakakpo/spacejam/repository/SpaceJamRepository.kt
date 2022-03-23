@@ -1,9 +1,7 @@
 package jc.iakakpo.spacejam.repository
 
 import com.apollographql.apollo3.api.ApolloResponse
-import jc.iakakpo.spacejam.CompanyDetails
-import jc.iakakpo.spacejam.CompanyQuery
-import jc.iakakpo.spacejam.PastLaunchesQuery
+import jc.iakakpo.spacejam.*
 import jc.iakakpo.spacejam.utils.ClientResult
 import kotlinx.coroutines.flow.Flow
 
@@ -19,8 +17,21 @@ interface SpaceJamRepository {
 
   suspend fun getCompany(): Flow<ClientResult<ApolloResponse<CompanyQuery.Data>>>
 
+
+  fun getMissions():Flow<ClientResult<ApolloResponse<MissionsQuery.Data>>>
+
+  suspend fun getLandPads():Flow<ClientResult<ApolloResponse<LandpadsQuery.Data>>>
+
+  suspend fun getShips():Flow<ClientResult<ApolloResponse<LandpadsQuery.Data>>>
+
+
+  /**
+   * Suspend function to save Company Details into SpaceJamDatabase
+   * */
   suspend fun insertCompanyLocal(companyDetails: CompanyDetails)
 
   suspend fun getCompanyLocal(): CompanyDetails?
+
+
 
 }

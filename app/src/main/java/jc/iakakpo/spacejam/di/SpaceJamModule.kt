@@ -9,8 +9,8 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import jc.iakakpo.spacejam.BuildConfig
+import jc.iakakpo.spacejam.enums.StringResourceProvider
 import jc.iakakpo.spacejam.models.SpaceJamDb
-import jc.iakakpo.spacejam.utils.PrefManager
 import jc.iakakpo.spacejam.utils.graphQlUrl
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -28,6 +28,7 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object SpaceJamModule {
+
 
 
   @Singleton
@@ -55,10 +56,10 @@ object SpaceJamModule {
   @Singleton
   fun provideOkHttpClient(loggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
     val okHttpClient = OkHttpClient().newBuilder()
-    okHttpClient.callTimeout(20L, TimeUnit.SECONDS)
-    okHttpClient.connectTimeout(20L, TimeUnit.SECONDS)
-    okHttpClient.readTimeout(20L, TimeUnit.SECONDS)
-    okHttpClient.writeTimeout(20L, TimeUnit.SECONDS)
+    okHttpClient.callTimeout(10L, TimeUnit.SECONDS)
+    okHttpClient.connectTimeout(10L, TimeUnit.SECONDS)
+    okHttpClient.readTimeout(10L, TimeUnit.SECONDS)
+    okHttpClient.writeTimeout(10L, TimeUnit.SECONDS)
     okHttpClient.build()
     if (BuildConfig.DEBUG) {
       okHttpClient.addInterceptor(loggingInterceptor)

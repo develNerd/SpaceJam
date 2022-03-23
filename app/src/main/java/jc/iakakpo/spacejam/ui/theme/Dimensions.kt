@@ -23,6 +23,7 @@ val listItemSupportingTextSize = 13.sp
  * */
 val dp15 = 15.dp
 val dp5 = 5.dp
+val dp3 = 3.dp
 val dp18 = 18.dp
 val dp35 = 35.dp
 val dp10 = 10.dp

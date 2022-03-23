@@ -16,6 +16,7 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.airbnb.lottie.compose.*
 import jc.iakakpo.spacejam.R
 import jc.iakakpo.spacejam.ui.theme.*
 
@@ -104,6 +105,40 @@ fun PageLoader(modifier: Modifier = Modifier) {
       }
 
 
+    }
+  }
+}
+
+
+/**
+ *
+ * Rocker loader page for when data is loading
+ * */
+@Composable
+fun RocketLoader(modifier: Modifier = Modifier) {
+  val composition by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.rocket_in_space))
+  val progress by animateLottieCompositionAsState(
+    composition,
+    iterations = LottieConstants.IterateForever,
+  )
+  LottieAnimation(
+    composition,
+    progress, modifier = modifier.size(100.dp)
+  )
+}
+
+/**
+ *
+ * Retry view to retry if Api Call isn't successful
+ * */
+@Composable
+fun RetryView(boxScope: BoxScope, onRetry: () -> Unit) {
+  boxScope.apply {
+    Column(modifier = Modifier.align(Alignment.Center), horizontalAlignment = Alignment.CenterHorizontally) {
+      Text(text = "Something Went Wrong", modifier = Modifier.align(Alignment.CenterHorizontally))
+      OutlinedButton(onClick = {onRetry() }) {
+        Text(text = "Retry", modifier = Modifier.padding(horizontal = 15.dp))
+      }
     }
   }
 }

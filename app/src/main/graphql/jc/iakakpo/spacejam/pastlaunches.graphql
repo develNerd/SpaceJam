@@ -40,3 +40,40 @@ query Company {
     }
 }
 
+query Missions {
+    missions {
+        id
+        name
+        description
+        website
+        twitter
+        manufacturers
+        wikipedia
+    }
+}
+
+query Landpads {
+    landpads {
+        id
+        full_name
+        details
+        location {
+            latitude
+            longitude
+            name
+            region
+        }
+        landing_type
+        wikipedia
+        status
+    }
+}
+
+query Ships {
+    ships {
+        name
+        image
+        url
+    }
+}
+

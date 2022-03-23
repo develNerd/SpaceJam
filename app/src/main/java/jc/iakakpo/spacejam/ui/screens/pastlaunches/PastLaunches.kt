@@ -1,5 +1,6 @@
 package jc.iakakpo.spacejam.ui.screens.pastlaunches
 
+import android.widget.Toast
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
@@ -14,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -24,6 +26,8 @@ import jc.iakakpo.spacejam.R
 import jc.iakakpo.spacejam.ui.screens.viewhelpers.*
 import jc.iakakpo.spacejam.ui.theme.*
 import jc.iakakpo.spacejam.utils.randoms
+import timber.log.Timber
+import java.util.*
 
 /**
  * @author Isaac Akakpo
@@ -51,10 +55,11 @@ fun PastLaunchesPage(viewModel: PastLaunchesViewModel, navController: NavControl
                 mutableStateOf(false)
             }
             val paginatedPastLaunches = viewModel.paginatedPastLaunches.collectAsLazyPagingItems()
+            val context = LocalContext.current
 
             LazyColumn(modifier = Modifier.fillMaxSize()) {
 
-                items(paginatedPastLaunches) { launches ->
+                items(paginatedPastLaunches, key = { it.missionName!! }) { launches ->
                     PastLaunchesItem(
                         launches?.launch_year, launches?.missionName,
                         launches?.links?.flickerImages

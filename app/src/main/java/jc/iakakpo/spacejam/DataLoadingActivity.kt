@@ -21,6 +21,8 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.airbnb.lottie.compose.*
 import dagger.hilt.android.AndroidEntryPoint
+import jc.iakakpo.spacejam.ui.screens.viewhelpers.RetryView
+import jc.iakakpo.spacejam.ui.screens.viewhelpers.RocketLoader
 import jc.iakakpo.spacejam.ui.theme.SpaceJamTheme
 import jc.iakakpo.spacejam.ui.theme.backGroundColor
 import jc.iakakpo.spacejam.ui.theme.textColor
@@ -119,37 +121,4 @@ fun LoadingStatus(loadingText: String, textColor: Color = textColor()) {
         fontFamily = FontFamily.SansSerif,
         fontStyle = FontStyle.Italic
     )
-}
-
-/**
- *
- * Rocker loader page for when data is loading
- * */
-@Composable
-fun RocketLoader(modifier: Modifier = Modifier) {
-    val composition by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.rocket_in_space))
-    val progress by animateLottieCompositionAsState(
-        composition,
-        iterations = LottieConstants.IterateForever,
-    )
-    LottieAnimation(
-        composition,
-        progress, modifier = modifier.size(100.dp)
-    )
-}
-
-/**
- *
- * Retry view to retry if Api Call isn't successful
- * */
-@Composable
-fun RetryView(boxScope: BoxScope, onRetry: () -> Unit) {
-    boxScope.apply {
-        Column(modifier = Modifier.align(Alignment.Center), horizontalAlignment = Alignment.CenterHorizontally) {
-            Text(text = "Something Went Wrong", modifier = Modifier.align(Alignment.CenterHorizontally))
-            OutlinedButton(onClick = { }) {
-                Text(text = "Retry", modifier = Modifier.padding(horizontal = 15.dp))
-            }
-        }
-    }
 }
