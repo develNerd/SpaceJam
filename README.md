@@ -1,7 +1,7 @@
 # SpaceJam
 SpaceJam is a Jetpack Compose app implementing Clean-Architecture with graphql, sqldelight, canvas api/custom UIs, navigation, material3 and many more :).
 
- :white_check_mark: Jetpack Compose  <br />  
+ :white_check_mark: Jetpack Compose   
  :white_check_mark: Clean Architecture  <br /> 
  :white_check_mark: GraphQl  <br /> 
  :white_check_mark: SqlDelight <br /> 
