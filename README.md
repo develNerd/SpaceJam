@@ -13,5 +13,5 @@ SpaceJam is a Jetpack Compose app implementing Clean-Architecture with graphql, 
  
  ### Documentation ###
  
- [https://develnerd.github.io/SpaceJam/index.html](Documentaion)
+ [https://develnerd.github.io/SpaceJam/index.html]
 
