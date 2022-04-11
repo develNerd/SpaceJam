@@ -16,7 +16,7 @@ val titleTextSize = 20.sp
 val contextTextSize = 18.sp
 val normalTextSize = 16.sp
 val listItemMainTextSize = 15.sp
-val listItemSupportingTextSize = 13.sp
+val SupportingTextSize = 13.sp
 
 /**
  * Padding Sizes

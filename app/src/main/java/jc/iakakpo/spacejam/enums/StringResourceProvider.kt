@@ -18,11 +18,11 @@ import javax.inject.Inject
 
 class StringResourceProvider @Inject constructor ( @ApplicationContext private val context: Context) {
 
-  fun mainPage(): String = context.getString(R.string.mainPage)
-  fun pastLaunches(): String = context.getString(R.string.pastLaunches)
-  fun companyDetails(): String = context.getString(R.string.companyDetails)
-  fun ships(): String = context.getString(R.string.ships)
-  fun landPads(): String = context.getString(R.string.landPads)
-  fun missions(): String = context.getString(R.string.missions)
+  val mainPage: String = context.getString(R.string.mainPage)
+  val pastLaunches: String = context.getString(R.string.pastLaunches)
+  val ships = context.getString(R.string.ships)
+  val landPads: String = context.getString(R.string.landPads)
+  val missions: String = context.getString(R.string.missions)
+  val companyDetails = context.getString(R.string.companyDetails)
 
 }

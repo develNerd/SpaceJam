@@ -8,7 +8,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import jc.iakakpo.spacejam.ui.theme.dp20
 import jc.iakakpo.spacejam.ui.theme.listItemMainTextSize
-import jc.iakakpo.spacejam.ui.theme.listItemSupportingTextSize
+import jc.iakakpo.spacejam.ui.theme.SupportingTextSize
 import jc.iakakpo.spacejam.ui.theme.titleTextSize
 
 /**
@@ -38,7 +38,7 @@ fun ListItemMainText(text: String, color: Color = Color.Black) {
 fun ListItemSupportText(text: String, color: Color = Color.Black) {
   Text(
     text = text,
-    fontSize = listItemSupportingTextSize,
+    fontSize = SupportingTextSize,
     color = color
   )
 }

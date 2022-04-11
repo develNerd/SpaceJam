@@ -53,7 +53,8 @@ fun Missions(navController: NavController, missionsViewModel: MissionsViewModel,
         Toolbar(title = title, showDropDown = false) {
             navController.popBackStack()
         }
-    }, drawerContent = {
+    },
+        drawerContent = {
             Box(modifier = Modifier.fillMaxSize()){
                 Text(text = "Not Implemented Yet. :]", modifier = Modifier.align(Alignment.Center))
             }

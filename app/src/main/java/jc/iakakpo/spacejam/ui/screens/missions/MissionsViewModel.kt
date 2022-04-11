@@ -20,7 +20,6 @@ import javax.inject.Inject
 @HiltViewModel
 class MissionsViewModel @Inject constructor(
     private val spaceJamRepository: SpaceJamRepository,
-    private val webSiteThumbnailHelper: WebSiteThumbnailHelper
 ) : ViewModel() {
 
     private val retryTrigger = RetryTrigger()

@@ -20,9 +20,9 @@ interface SpaceJamRepository {
 
   fun getMissions():Flow<ClientResult<ApolloResponse<MissionsQuery.Data>>>
 
-  suspend fun getLandPads():Flow<ClientResult<ApolloResponse<LandpadsQuery.Data>>>
+  fun getLandPads():Flow<ClientResult<ApolloResponse<LandpadsQuery.Data>>>
 
-  suspend fun getShips():Flow<ClientResult<ApolloResponse<LandpadsQuery.Data>>>
+  fun getShips():Flow<ClientResult<ApolloResponse<ShipsQuery.Data>>>
 
 
   /**

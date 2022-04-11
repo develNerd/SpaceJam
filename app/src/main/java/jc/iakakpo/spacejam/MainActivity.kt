@@ -6,7 +6,9 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MoreVert
@@ -25,14 +27,15 @@ import jc.iakakpo.spacejam.enums.StringResourceProvider
 import jc.iakakpo.spacejam.ui.screens.MainDashboardItem
 import jc.iakakpo.spacejam.ui.screens.companydetails.CompanyDetailsViewModel
 import jc.iakakpo.spacejam.ui.screens.companydetails.Details
+import jc.iakakpo.spacejam.ui.screens.launchPads.LandPadViewModel
+import jc.iakakpo.spacejam.ui.screens.launchPads.LandPads
 import jc.iakakpo.spacejam.ui.screens.missions.Missions
 import jc.iakakpo.spacejam.ui.screens.missions.MissionsViewModel
 import jc.iakakpo.spacejam.ui.screens.pastlaunches.PastLaunchesPage
 import jc.iakakpo.spacejam.ui.screens.pastlaunches.PastLaunchesViewModel
-import jc.iakakpo.spacejam.ui.theme.SpaceJamTheme
-import jc.iakakpo.spacejam.ui.theme.backGroundColor
-import jc.iakakpo.spacejam.ui.theme.dp10
-import jc.iakakpo.spacejam.ui.theme.spaceLightGreen
+import jc.iakakpo.spacejam.ui.screens.ships.Ships
+import jc.iakakpo.spacejam.ui.screens.ships.ShipsViewModel
+import jc.iakakpo.spacejam.ui.theme.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -50,20 +53,28 @@ class MainActivity : ComponentActivity() {
             SpaceJamTheme {
 
                 val navController = rememberNavController()
-                NavHost(navController = navController, startDestination = stringProvider.mainPage()) {
+                NavHost(navController = navController, startDestination = stringProvider.mainPage) {
 
-                    composable(stringProvider.mainPage()) { SpaceMainPage(navController, pages = stringProvider) }
-                    composable(stringProvider.pastLaunches()) {
+                    composable(stringProvider.mainPage) { SpaceMainPage(navController, stringProvider = stringProvider) }
+                    composable(stringProvider.pastLaunches) {
                         val pastLaunchesViewModel = hiltViewModel<PastLaunchesViewModel>()
                         PastLaunchesPage(pastLaunchesViewModel, navController)
                     }
-                    composable(stringProvider.companyDetails()) {
+                    composable(stringProvider.ships){
+                        val shipsViewModel = hiltViewModel<ShipsViewModel>()
+                        Ships(navController = navController, shipsViewModel = shipsViewModel, title = stringProvider.ships)
+                    }
+                    composable(stringProvider.companyDetails) {
                         val companyDetailsViewModel: CompanyDetailsViewModel = hiltViewModel<CompanyDetailsViewModel>()
                         Details(navController, companyDetailsViewModel)
                     }
-                    composable(stringProvider.missions()) {
+                    composable(stringProvider.missions) {
                         val missionsViewModel = hiltViewModel<MissionsViewModel>()
-                        Missions(navController, missionsViewModel,stringProvider.missions())
+                        Missions(navController, missionsViewModel,stringProvider.missions)
+                    }
+                    composable(stringProvider.landPads){
+                        val landPadViewModel:LandPadViewModel = hiltViewModel()
+                        LandPads(navController = navController, landPadViewModel = landPadViewModel , title = stringProvider.landPads)
                     }
 
                     /*...*/
@@ -75,7 +86,7 @@ class MainActivity : ComponentActivity() {
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun SpaceMainPage(navController: NavController,pages: StringResourceProvider) {
+fun SpaceMainPage(navController: NavController, stringProvider: StringResourceProvider) {
     Scaffold(
         topBar =
         {
@@ -114,9 +125,9 @@ fun SpaceMainPage(navController: NavController,pages: StringResourceProvider) {
                     ) {
                         DropdownMenuItem(onClick = {
                             expanded = false
-                            navController.navigate(pages.companyDetails())
+                            navController.navigate(stringProvider.companyDetails)
                         }) {
-                            Text(pages.companyDetails())
+                            Text(stringProvider.companyDetails)
                         }
                     }
                 }
@@ -138,10 +149,11 @@ fun SpaceMainPage(navController: NavController,pages: StringResourceProvider) {
                     .padding(5.dp),
                 horizontalArrangement = Arrangement.spacedBy(15.dp)
             ) {
-                MainDashboardItem(pages.pastLaunches(), R.drawable.ic_past_launches, this) {
-                    navController.navigate(pages.pastLaunches())
+                MainDashboardItem(stringProvider.pastLaunches, R.drawable.ic_past_launches, this) {
+                    navController.navigate(stringProvider.pastLaunches)
                 }
                 MainDashboardItem("Ships", R.drawable.ic_ships, this) {
+                    navController.navigate(stringProvider.ships)
                 }
             }
 
@@ -151,10 +163,11 @@ fun SpaceMainPage(navController: NavController,pages: StringResourceProvider) {
                     .padding(5.dp),
                 horizontalArrangement = Arrangement.spacedBy(15.dp)
             ) {
-                MainDashboardItem(pages.missions(), R.drawable.ic_next_launches, this) {
-                    navController.navigate(pages.missions())
+                MainDashboardItem(stringProvider.missions, R.drawable.ic_next_launches, this) {
+                    navController.navigate(stringProvider.missions)
                 }
-                MainDashboardItem(pages.landPads(), R.drawable.ic_lauchpad, this) {
+                MainDashboardItem(stringProvider.landPads, R.drawable.ic_lauchpad, this) {
+                    navController.navigate(stringProvider.landPads)
                 }
             }
         }

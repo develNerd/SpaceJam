@@ -44,12 +44,14 @@ class SpaceJamRepositoryImpl @Inject constructor(@ApplicationContext appContext:
     emit(makeClientRequest(client.query(MissionsQuery())))
   }
 
-  override suspend fun getLandPads(): Flow<ClientResult<ApolloResponse<LandpadsQuery.Data>>> {
-    TODO("Not yet implemented")
+  override fun getLandPads(): Flow<ClientResult<ApolloResponse<LandpadsQuery.Data>>> = flow {
+    emit(ClientResult.InProgress)
+    emit(makeClientRequest(client.query(LandpadsQuery())))
   }
 
-  override suspend fun getShips(): Flow<ClientResult<ApolloResponse<LandpadsQuery.Data>>> {
-    TODO("Not yet implemented")
+  override fun getShips(): Flow<ClientResult<ApolloResponse<ShipsQuery.Data>>> = flow {
+    emit(ClientResult.InProgress)
+    emit(makeClientRequest(client.query(ShipsQuery())))
   }
 
   override suspend fun insertCompanyLocal(companyDetails: CompanyDetails) {
