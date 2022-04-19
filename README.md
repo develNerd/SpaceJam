@@ -11,8 +11,8 @@ SpaceJam is a Jetpack Compose app implementing Clean-Architecture with graphql, 
  :white_check_mark: Auto Retry like Twitter etc. <br /> 
  :white_check_mark: Navigation  <br /> 
  :white_check_mark: Test Cases - Ongoing  <br /> 
- ⚪: Theming with CompositionLocal - Upcoming  <br /> 
- ⚪: MovableContentOf() - Upcoming  <br /> 
+ ⚪ Theming with CompositionLocal - Upcoming  <br /> 
+ ⚪ MovableContentOf() - Upcoming  <br /> 
 
 
  
